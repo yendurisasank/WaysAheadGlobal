@@ -1,7 +1,7 @@
 import pandas as pd
 import warnings
 warnings.filterwarnings('ignore')
-
+#dataloading
 dataf=pd.read_csv("Bank_Marketing Analaysis.csv")
 dataf.drop(['Target Revenue'],axis=1,inplace=True)
 data = dataf.copy()
