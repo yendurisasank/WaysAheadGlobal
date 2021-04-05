@@ -9,7 +9,7 @@ from App.models import (
 import pandas as pd
 import joblib
 from .serializers import DataSerializer
-
+#api creation
 class Datainsertion(CreateAPIView):
     """
     Model POST API
