@@ -47,8 +47,8 @@ class Datainsertion(CreateAPIView):
                 obj = DataM.objects.all()
                 if obj.count() != 0:
                     obj[0].delete()
-                instance = serializer.save(loan = data["loan"])
-                return Response(data=json.loads(str(DataM.objects.get(id=instance.id))),status=status.HTTP_201_CREATED)
+                serializer.save(loan = data["loan"])
+                return Response(data=serializer.data,status=status.HTTP_201_CREATED)
             else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)                
         except Exception as e:
