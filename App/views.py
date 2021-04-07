@@ -9,6 +9,7 @@ from App.models import (
 import pandas as pd
 import joblib
 import json
+from django.core import serializers
 from .serializers import DataSerializer
 #api creation
 class Datainsertion(CreateAPIView):
@@ -47,8 +48,8 @@ class Datainsertion(CreateAPIView):
                 obj = DataM.objects.all()
                 if obj.count() != 0:
                     obj[0].delete()
-                serializer.save(loan = data["loan"])
-                return Response(data=serializer.data,status=status.HTTP_201_CREATED)
+                instance = serializer.save(loan = data["loan"])
+                return Response(data=json.loads(serializers.serialize('json',DataM.objects.filter(instance.id))),status=status.HTTP_201_CREATED)
             else:
                 return Response(status=status.HTTP_400_BAD_REQUEST)                
         except Exception as e:
